@@ -6,12 +6,7 @@
     padding: 40px;
     color: rgb(135, 135, 135);
   }
-  
-  .Weather .logo {
-    max-width: 150px;
-    display: block;
-  }
-  
+
   .Weather form {
     margin-top: 40px;
     border-bottom: 1px solid #f9f7fe;
@@ -157,12 +152,18 @@
     color: rgba(39, 33, 66, 0.4);
   }
   
+  .WeatherForecast img {
+    height: 50px;
+    margin-bottom: 25px;
+  }
+
   .WeatherForecast .forecast-temperature {
     font-style: normal;
     font-size: 18px;
     line-height: 1.5;
     color: #f65282;
     font-weight: bold;
+    margin-bottom: 50px;
   }
   
   .WeatherForecast .forecast-temperature-min {
@@ -183,4 +184,5 @@
     margin-top: 30px;
     align-items: center;
   }
+
   
