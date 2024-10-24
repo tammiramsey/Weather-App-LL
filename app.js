@@ -4,7 +4,6 @@ function handleSearchSubmit(e){
     e.preventDefault();
     var searchInput = document.querySelector("#search-form-input");
     var cityElement = document.querySelector("#selectedCity");
-    cityElement.innerHTML = searchInput.value;
     searchCity(searchInput.value);
 }
 
