@@ -3,7 +3,6 @@ searchFormElement.addEventListener("submit", handleSearchSubmit);
 function handleSearchSubmit(e){
     e.preventDefault();
     var searchInput = document.querySelector("#search-form-input");
-    var cityElement = document.querySelector("#selectedCity");
     searchCity(searchInput.value);
 }
 
