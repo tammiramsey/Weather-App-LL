@@ -16,5 +16,9 @@ function searchCity(city){
 
 function updateWeatherInfo(response){
     console.log(response.data);
-    var temperatureElement = 
+    var temperatureElement = document.querySelector(#temperature);
+    var temperature = response.data.temperature.current;
+    var cityElement = document.querySelector(#city);
+    cityElement.innerHTML = response.data.city;
+    temperatureElement.innerHTML = Math.round(temperature);
 }

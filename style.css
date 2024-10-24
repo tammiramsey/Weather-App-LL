@@ -193,4 +193,7 @@
     align-items: center;
   }
 
-  
+  #temperature, .unit {
+    font-weight:bold;
+    font-size: 50px;
+  }
