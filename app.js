@@ -22,3 +22,5 @@ function updateWeatherInfo(response){
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = Math.round(temperature);
 }
+
+searchCity("London");
