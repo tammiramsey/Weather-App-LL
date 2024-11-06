@@ -23,7 +23,7 @@ function updateWeatherInfo(response){
     var windElement = document.querySelector("#wind");
     var dateElement = new Date(response.data.time * 1000);
     var timeElement = document.querySelector("#time");
-    timeElement.innerHTML = `${dateElement.getDay(}:${dateElement.getHours()}:${dateElement.getMinutes()}`;
+    timeElement.innerHTML = `${dateElement.getDay()}:${dateElement.getHours()}:${dateElement.getMinutes()}`;
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = Math.round(temperature);
     descriptionElement.innerHTML = response.data.condition.description;
