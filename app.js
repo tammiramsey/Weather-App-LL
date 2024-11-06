@@ -26,4 +26,10 @@ function updateWeatherInfo(response){
     descriptionElement.innerHTML = response.data.condition.description;
     humidityElement.innerHTML = `${response.data.temperature.humid}%`;
     windElement.innerHTML = `${response.data.temperature.wind}%`;
+    console.log(temperatureElement);
+    console.log(descriptionElement);
+    console.log(humidityElement);
+    console.log(windElement);
+    new Date(1730918318 *1000);
 }
+searchCity("London");
