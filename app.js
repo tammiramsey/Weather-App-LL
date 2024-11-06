@@ -27,5 +27,3 @@ function updateWeatherInfo(response){
     humidityElement.innerHTML = `${response.data.temperature.humid}%`;
     windElement.innerHTML = `${response.data.temperature.wind}%`;
 }
-
-searchCity("London");
