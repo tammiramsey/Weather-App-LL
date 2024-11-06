@@ -18,8 +18,14 @@ function updateWeatherInfo(response){
     var temperatureElement = document.querySelector("#temperature");
     var temperature = response.data.temperature.current;
     var cityElement = document.querySelector("#city");
+    var descriptionElement = document.querySelector("#description");
+    var humidityElement = document.querySelector("#humid");
+    var windElement = document.querySelector("#wind");
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = Math.round(temperature);
+    descriptionElement.innerHTML = response.data.condition.description;
+    humidityElement.innerHTML = `${response.data.temperature.humid}%`;
+    windElement.innerHTML = `${response.data.temperature.wind}%`;
 }
 
 searchCity("London");
