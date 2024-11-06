@@ -21,6 +21,7 @@ function updateWeatherInfo(response){
     var descriptionElement = document.querySelector("#description");
     var humidityElement = document.querySelector("#humid");
     var windElement = document.querySelector("#wind");
+    var dateElement = new Date(response.data.time * 1000);
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = Math.round(temperature);
     descriptionElement.innerHTML = response.data.condition.description;
@@ -30,6 +31,6 @@ function updateWeatherInfo(response){
     console.log(descriptionElement);
     console.log(humidityElement);
     console.log(windElement);
-    new Date(1730918318 *1000);
+    console.log(dateElement);
 }
 searchCity("London");
