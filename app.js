@@ -23,16 +23,29 @@ function updateWeatherInfo(response){
     var windElement = document.querySelector("#wind");
     var dateElement = new Date(response.data.time * 1000);
     var timeElement = document.querySelector("#time");
-    timeElement.innerHTML = `${dateElement.getDay()}:${dateElement.getHours()}:${dateElement.getMinutes()}`;
+    var iconElement = document.querySelector("#icon");
+    timeElement.innerHTML = formatDate(date);
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = Math.round(temperature);
     descriptionElement.innerHTML = response.data.condition.description;
     humidityElement.innerHTML = `${response.data.temperature.humid}%`;
     windElement.innerHTML = `${response.data.temperature.wind}%`;
+    iconElement.innerHTML = `<img src ="${response.data.condition.icon_url}" class = "weather-app-icon"/>`;
     console.log(temperatureElement);
     console.log(descriptionElement);
     console.log(humidityElement);
     console.log(windElement);
     console.log(dateElement);
+}
+
+function formatDate(date){
+    var dayArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    var day = dayArray[date.getDay()];
+    var minutes = date.getMinutes();
+    var hours = date.getHours();
+    if(minutes < 10){
+        minutes = `0${minutes}`;
+    }
+    return `${day}:${hours}:${minutes}`;
 }
 searchCity("London");
