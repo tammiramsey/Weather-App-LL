@@ -1,7 +1,7 @@
 function searchCity(city){
     let query = document.getElementById('searchInput').value;
     var apiKey = "a3o950fc274379347b6a44aft08a3cb0";
-    var apiURL = `https://api.shecodes.io/weather/v1/current?query=${query}&key${apiKey}&units=metric`;
+    var apiURL = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}&units=metric`;
     axios.get(apiURL).then(updateWeatherInfo);
 }
 
@@ -23,6 +23,7 @@ function updateWeatherInfo(response){
 }
 function capitalize(description){
     var description = response.data.condition.description;
+    var descriptionElement = document.querySelector("#description");
     description = description.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     descriptionElement.innerHTML = description;
 }
