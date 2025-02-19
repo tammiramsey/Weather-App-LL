@@ -24,6 +24,6 @@ function capitalize(description){
     description = description.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     descriptionElement.innerHTML = description;
 }
-var searchFormElement = docum.querySelector("#search-form");
+var searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 searchCity("London");
