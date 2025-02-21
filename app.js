@@ -31,7 +31,7 @@ function updateWeatherInfo(response){
 }
 
 function searchCity(city){
-    let query = document.getElementById('searchInput').value;
+    var city = document.getElementById("city");
     var apiKey = "a3o950fc274379347b6a44aft08a3cb0";
     var apiURL = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}&units=metric`;
     axios.get(apiURL).then(updateWeatherInfo);
