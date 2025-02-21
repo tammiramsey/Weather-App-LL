@@ -14,6 +14,11 @@ function updateWeatherInfo(response){
     var descriptionElement = document.querySelector("#description");
     description = description.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     descriptionElement.innerHTML = description;
+    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+    windElement.innerHTML = `${response.data.temperature.wind} km/h`;
+    timeElement.innerHTML = formatDate(date);
+    iconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weather-app-icon"/>`;
+    console.log(response.data.condition.description);
     var date = new Date (response.data.time * 1000);
     var day = days[date.getDay()];
     var hours = date.getHours();
@@ -23,11 +28,6 @@ function updateWeatherInfo(response){
         minutes = `0${minutes}`;
     }
     return `${day}, ${hours}:${minutes}`;
-    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
-    windElement.innerHTML = `${response.data.temperature.wind} km/h`;
-    timeElement.innerHTML = formatDate(date);
-    iconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weather-app-icon"/>`;
-    console.log(response.data.condition.description);
 }
 
 function searchCity(city){
