@@ -20,10 +20,10 @@ function updateWeatherInfo(response){
     iconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weather-app-icon"/>`;
     console.log(response.data.condition.description);
     var date = new Date (response.data.time * 1000);
+    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     var day = days[date.getDay()];
     var hours = date.getHours();
     var minutes = date.getMinutes();
-    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     if(minutes < 10){
         minutes = `0${minutes}`;
     }
