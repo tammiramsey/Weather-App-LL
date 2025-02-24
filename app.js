@@ -44,5 +44,5 @@ function handleSearchSubmit(event){
 }
 
 var searchFormElement = document.querySelector("#search-form");
-searchFormElement.addEventListener("submit", handleSearchSubmit);
+searchFormElement.addEventListener("submit", handleSearchSubmit());
 searchCity("London");
