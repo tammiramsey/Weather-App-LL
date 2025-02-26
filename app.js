@@ -1,3 +1,23 @@
+function displayForecast(response){
+    var forecast = document.querySelector("#forecast")
+    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var forecastHTML ="";
+    days.forEach(function(day){
+        forecastHTML = 
+            `<div class="WeatherForecastPreview">
+                <div class="forecast-time">Tue</div>
+                    <div id="icon"></div>
+                    <canvas width="38" height="38"></canvas>
+                    <div class="forecast-temperature">
+                        <span class="forecast-icon"></span>
+                        <span class="forecast-temperature-max">23°C</span>
+                        <span class="forecast-temperature-min">14°C</span>
+                    </div>
+            </div>`;
+    });
+    forecast.innerHTML = forecastHTML;
+}
+
 function updateWeatherInfo(response){
     var temperatureElement = document.querySelector("#temperature");
     var temperature = response.data.temperature.current;
@@ -28,27 +48,6 @@ function updateWeatherInfo(response){
         minutes = `0${minutes}`;
     }
     return `${day}, ${hours}:${minutes}`;
-}
-
-
-function displayForecast(response){
-    var forecast = document.querySelector("#forecast")
-    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var forecastHTML ="";
-    days.forEach(function(day){
-        forecastHTML = 
-            `<div class="WeatherForecastPreview">
-                <div class="forecast-time">Tue</div>
-                    <div id="icon"></div>
-                    <canvas width="38" height="38"></canvas>
-                    <div class="forecast-temperature">
-                        <span class="forecast-icon"></span>
-                        <span class="forecast-temperature-max">23°C</span>
-                        <span class="forecast-temperature-min">14°C</span>
-                    </div>
-            </div>`;
-    });
-    forecast.innerHTML = forecastHTML;
 }
 
 function searchCity(city){
