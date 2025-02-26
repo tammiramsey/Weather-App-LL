@@ -171,6 +171,11 @@
     margin-left: 10px;
     opacity: 0.6;
   }
+
+  .WeatherForecast .forecast-icon {
+    text-align: center;
+    font-size: 38px;
+  }
   
   .Weather .WeatherForecast canvas {
     display: block;
