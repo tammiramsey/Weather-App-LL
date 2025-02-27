@@ -67,6 +67,7 @@ function handleSearchSubmit(event){
     var searchInput = document.querySelector("#search-form-input");
     cityElement.innerHTML = searchInput.value;
     searchCity(searchInput.value);
+    getForecast(searchInput.value);
 }
 
 var searchFormElement = document.querySelector("#search-form");
