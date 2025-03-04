@@ -42,44 +42,23 @@ function getForecast(city) {
         .catch(error => console.error("Error fetching forecast:", error));
 }
 
-function updateWeatherInfo(response) {
-    var temperatureElement = document.querySelector("#temperature");
-    var temperature = response.data.temperature ? response.data.temperature.current : "N/A";
-    temperatureElement.innerHTML = Math.round(temperature);
-    
-    var cityElement = document.querySelector("#selected-city");
-    cityElement.innerHTML = response.data.city || "Unknown City";
-    
-    var descriptionElement = document.querySelector("#description");
-    var description = response.data.condition ? response.data.condition.description : "No description available";
-    description = description.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-    descriptionElement.innerHTML = description;
-    
-    var humidityElement = document.querySelector("#humid");
-    var humidity = response.data.temperature ? response.data.temperature.humidity : "N/A";
-    humidityElement.innerHTML = `${humidity}%`;
-    
-    var windElement = document.querySelector("#wind");
-    var windSpeed = response.data.wind ? response.data.wind.speed : "N/A";
-    windElement.innerHTML = `${windSpeed} km/h`;
-    
-    var iconElement = document.querySelector("#icon");
-    var iconUrl = response.data.condition ? response.data.condition.icon_url : "";
-    iconElement.innerHTML = `<img src="${iconUrl}" class="weather-app-icon"/>`;
-    
-    var timeElement = document.querySelector("#time");
-    var date = new Date(response.data.time * 1000);
-    timeElement.innerHTML = formatDate(date);
-    
-    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var day = days[date.getDay()];
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    if (minutes < 10) {
-        minutes = `0${minutes}`;
+function updateWeatherInfo(weatherData) {
+    const weatherElement = document.getElementById("weatherInfo");
+    if (weatherElement) {
+        weatherElement.innerHTML = `Weather: ${weatherData}`;
+    } else {
+        console.error("Element with ID 'weatherInfo' not found in the DOM.");
     }
-    return `${day}, ${hours}:${minutes}`;
 }
+
+function fetchWeather() {
+    // Fetch weather data (simulated)
+    let weatherData = "Sunny and 75";
+    updateWeatherInfo(weatherData);
+}
+
+fetchWeather(); // Call the function to fetch and update weather info
+
 
 function searchCity(city) {
     var apiKey = "a3o950fc274379347b6a44aft08a3cb0";
