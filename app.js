@@ -1,20 +1,32 @@
-function displayForecast(response){
+function displayForecast(response) {
     var forecast = document.querySelector("#forecast");
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    var forecastHTML ="";
-    days.forEach(function(day){
-        forecastHTML += 
-            `<div class="WeatherForecastPreview">
-                <div class="forecast-time">Tue</div>
-                    <div id="icon"></div>
+    var forecastHTML = "";
+
+    // Assuming response.data.daily contains the forecast data
+    response.data.daily.forEach(function(dayData, index) {
+        if (dayData.time && typeof dayData.time === 'number') {
+            var day = days[new Date(dayData.time * 1000).getDay()]; // Get the day of the week
+            var maxTemp = Math.round(dayData.temperature.maximum);
+            var minTemp = Math.round(dayData.temperature.minimum);
+            var iconUrl = dayData.condition.icon_url; // Assuming icon_url is available
+
+            forecastHTML += 
+                `<div class="WeatherForecastPreview">
+                    <div class="forecast-time">${day}</div>
+                    <div id="icon"><img src="${iconUrl}" class="weather-app-icon"/></div>
                     <canvas width="38" height="38"></canvas>
                     <div class="forecast-temperature">
                         <span class="forecast-icon"></span>
-                        <span class="forecast-temperature-max">23°C</span>
-                        <span class="forecast-temperature-min">14°C</span>
+                        <span class="forecast-temperature-max">${maxTemp}°C</span>
+                        <span class="forecast-temperature-min">${minTemp}°C</span>
                     </div>
-            </div>`;
+                </div>`;
+        } else {
+            console.error("Invalid time data for day:", dayData);
+        }
     });
+
     forecast.innerHTML = forecastHTML;
 }
 
@@ -24,32 +36,41 @@ function getForecast(city){
     axios.get(apiURL).then(displayForecast);
 }
 
-function updateWeatherInfo(response){
+function updateWeatherInfo(response) {
     var temperatureElement = document.querySelector("#temperature");
-    var temperature = response.data.temperature.current;
+    var temperature = response.data.temperature ? response.data.temperature.current : "N/A";
     temperatureElement.innerHTML = Math.round(temperature);
+    
     var cityElement = document.querySelector("#selected-city");
-    cityElement.innerHTML = response.data.city;
+    cityElement.innerHTML = response.data.city || "Unknown City";
+    
     var descriptionElement = document.querySelector("#description");
-    var description = response.data.condition.description;
+    var description = response.data.condition ? response.data.condition.description : "No description available";
     description = description.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     descriptionElement.innerHTML = description;
     console.log(description);
-    getForecast(response.data.city);
+    
     var humidityElement = document.querySelector("#humid");
-    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+    var humidity = response.data.temperature ? response.data.temperature.humidity : "N/A";
+    humidityElement.innerHTML = `${humidity}%`;
+    
     var windElement = document.querySelector("#wind");
-    windElement.innerHTML = `${response.data.temperature.wind} km/h`;
+    var windSpeed = response.data.wind ? response.data.wind.speed : "N/A"; // Adjusted to access wind speed correctly
+    windElement.innerHTML = `${windSpeed} km/h`;
+    
     var iconElement = document.querySelector("#icon");
-    iconElement.innerHTML = `<img src = "${response.data.condition.icon_url}" class="weather-app-icon"/>`;
+    var iconUrl = response.data.condition ? response.data.condition.icon_url : "";
+    iconElement.innerHTML = `<img src="${iconUrl}" class="weather-app-icon"/>`;
+    
     var timeElement = document.querySelector("#time");
-    var date = new Date (response.data.time * 1000);
+    var date = new Date(response.data.time * 1000);
     timeElement.innerHTML = formatDate(date);
+    
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     var day = days[date.getDay()];
     var hours = date.getHours();
     var minutes = date.getMinutes();
-    if(minutes < 10){
+    if (minutes < 10) {
         minutes = `0${minutes}`;
     }
     return `${day}, ${hours}:${minutes}`;
@@ -67,8 +88,9 @@ function handleSearchSubmit(event){
     var searchInput = document.querySelector("#search-form-input");
     var cityElement = document.querySelector("#selected-city");
     cityElement.innerHTML = searchInput.value;
-    searchCity(searchInput.value);
-    getForecast(searchInput.value);
+    searchCity(searchInput.value); // Retain this call to fetch weather data
+    // Removed the redundant getForecast call
+    // getForecast(searchInput.value);
 }
 
 var searchFormElement = document.querySelector("#search-form");
