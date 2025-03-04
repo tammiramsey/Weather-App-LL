@@ -24,13 +24,7 @@ function getForecast(city){
     axios.get(apiURL).then(displayForecast);
 }
 
-function updateWeatherInfo(data){
-    const weatherInfoElement = document.querySelector('#weatherInfo'); // Selecting the element
-    if (weatherInfoElement) {
-        weatherInfoElement.innerHTML = `Temperature: ${data.temperature}`; // Only set `innerHTML` if the element is found
-    } else {
-        console.error('Element with id "weatherInfo" not found.');
-    }
+function updateWeatherInfo(response){
     var temperatureElement = document.querySelector("#temperature");
     var temperature = response.data.temperature.current;
     temperatureElement.innerHTML = Math.round(temperature);
