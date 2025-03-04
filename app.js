@@ -24,7 +24,7 @@ function getForecast(city){
     axios.get(apiURL).then(displayForecast);
 }
 
-function updateWeatherInfo(response){
+function updateWeatherInfo(data){
     const weatherInfoElement = document.querySelector('#weatherInfo'); // Selecting the element
     if (weatherInfoElement) {
         weatherInfoElement.innerHTML = `Temperature: ${data.temperature}`; // Only set `innerHTML` if the element is found
