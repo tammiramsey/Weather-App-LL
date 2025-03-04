@@ -1,9 +1,9 @@
 function displayForecast(response){
-    var forecast = document.querySelector("#forecast")
+    var forecast = document.querySelector("#forecast");
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     var forecastHTML ="";
     days.forEach(function(day){
-        forecastHTML = 
+        forecastHTML += 
             `<div class="WeatherForecastPreview">
                 <div class="forecast-time">Tue</div>
                     <div id="icon"></div>
@@ -32,7 +32,6 @@ function updateWeatherInfo(response){
     cityElement.innerHTML = response.data.city;
     var descriptionElement = document.querySelector("#description");
     var description = response.data.condition.description;
-    var descriptionElement = document.querySelector("#description");
     description = description.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     descriptionElement.innerHTML = description;
     console.log(description);
@@ -66,12 +65,13 @@ function searchCity(city){
 function handleSearchSubmit(event){
     event.preventDefault();
     var searchInput = document.querySelector("#search-form-input");
+    var cityElement = document.querySelector("#selected-city");
     cityElement.innerHTML = searchInput.value;
     searchCity(searchInput.value);
     getForecast(searchInput.value);
 }
 
 var searchFormElement = document.querySelector("#search-form");
-searchFormElement.addEventListener("submit", handleSearchSubmit());
+searchFormElement.addEventListener("submit", handleSearchSubmit);
 searchCity("London");
 displayForecast("London");
