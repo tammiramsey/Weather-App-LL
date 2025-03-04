@@ -8,8 +8,8 @@ function displayForecast(response) {
         response.data.daily.forEach(function(dayData) {
             if (dayData.time && typeof dayData.time === 'number') {
                 var day = days[new Date(dayData.time * 1000).getDay()];
-                var maxTemp = dayData.temperature && dayData.temperature.maximum ? Math.round(dayData.temperature.maximum) : "N/A";
-                var minTemp = dayData.temperature && dayData.temperature.minimum ? Math.round(dayData.temperature.minimum) : "N/A";
+                var maxTemp = dayData.temperature && dayData.temperature.maximum !== undefined ? Math.round(dayData.temperature.maximum) : "N/A";
+                var minTemp = dayData.temperature && dayData.temperature.minimum !== undefined ? Math.round(dayData.temperature.minimum) : "N/A";
                 var iconUrl = dayData.condition && dayData.condition.icon_url ? dayData.condition.icon_url : "";
 
                 forecastHTML += 
@@ -33,6 +33,7 @@ function displayForecast(response) {
 
     forecast.innerHTML = forecastHTML;
 }
+
 
 function getForecast(city) {
     var apiKey = "a3o950fc274379347b6a44aft08a3cb0";
