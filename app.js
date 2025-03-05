@@ -73,7 +73,7 @@ function displayForecast(response) {
                         </div>
                     </div>`;
             } else {
-                console.error("Invalid time data for day:", dayData);
+                console.error("Invalid time data for day:", day); // Corrected variable name
             }
         }
     });
