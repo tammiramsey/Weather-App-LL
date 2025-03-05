@@ -183,7 +183,7 @@
   }
   
   .Weather .WeatherForecast canvas {
-    display: block;
+    display: inline;
     margin: 20px auto;
   }
 

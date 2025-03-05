@@ -23,6 +23,7 @@ function updateWeatherInfo(response) {
     
     var timeElement = document.querySelector("#time");
     timeElement.innerHTML = formatDate(response.data.time); // Pass the correct time
+    getForecast(response.data.city);
 }
 
 
@@ -53,28 +54,27 @@ function displayForecast(response) {
 
     // Validate response data
     forecast.forEach(function(day, index) {
-        // Check if day.time exists
-        if (day.time) {
-            var date = new Date(day.time * 1000);
-            var dayName = days[date.getDay()];
+        // Check if day.time and day.condition exist
+
 
             if (index < 5) {
+                var date = new Date(day.time * 1000);
+            var dayName = days[date.getDay()];
                 forecastHTML += 
                 `<div class="WeatherForecastPreview">
                         <div class="forecast-time">${dayName}</div>
                     <div id="icon">
-                        <img src="${day.condition ? day.condition.icon_url : ''}" alt="${day.condition ? day.condition.description : 'Weather icon'}" class="weather-forecast-icon-img"/>
+                        <img src="${day.condition.icon_url}" alt="${day.condition.description}" class="weather-forecast-icon-img"/>
                     </div>
                         <canvas width="38" height="38"></canvas>
                         <div class="forecast-temperature">
                             <span class="forecast-icon"></span>
-                             <span class="forecast-temperature-max">${day.temperature ? Math.round(day.temperature.maximum) : 'N/A'}°C</span>
-                        <span class="forecast-temperature-min">${day.temperature ? Math.round(day.temperature.minimum) : 'N/A'}°C</span>
+                             <span class="forecast-temperature-max">${Math.round(day.temperature.maximum)}°C</span>
+                        <span class="forecast-temperature-min">${Math.round(day.temperature.minimum)}°C</span>
                         </div>
                     </div>`;
-            } else {
-                console.error("Invalid time data for day:", day); // Corrected variable name
-            }
+        } else {
+            console.error("Invalid data for day:", day); // Log invalid day data
         }
     });
     forecastElement.innerHTML = forecastHTML;
