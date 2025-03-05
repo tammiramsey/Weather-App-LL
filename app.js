@@ -1,6 +1,8 @@
 function updateWeatherInfo(response) {
     var temperatureElement = document.querySelector("#temperature");
     var temperature = response.data.temperature.current;
+
+    //why the Math function here?
     temperatureElement.innerHTML = Math.round(temperature);
     
     var cityElement = document.querySelector("#selected-city");
@@ -24,9 +26,11 @@ function updateWeatherInfo(response) {
     var timeElement = document.querySelector("#time");
     timeElement.innerHTML = formatDate(response.data.time); // Pass the correct time
     getForecast(response.data.city);
+
+    //date var and HTML element are missing
 }
 
-
+//instead of using timestamp directly, use 'date' as the paremeter and you can elimintate the math part of line 35
 function formatDate(timestamp) {
     var date = new Date(timestamp * 1000); // Use the timestamp directly
     var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -66,6 +70,7 @@ function displayForecast(response) {
                     <div id="icon">
                         <img src="${day.condition.icon_url}" alt="${day.condition.description}" class="weather-forecast-icon-img"/>
                     </div>
+                    //canvas may be messing with your function
                         <canvas width="38" height="38"></canvas>
                         <div class="forecast-temperature">
                             <span class="forecast-icon"></span>
@@ -74,6 +79,7 @@ function displayForecast(response) {
                         </div>
                     </div>`;
         } else {
+            // you dont need to use a variable as a parameter
             console.error("Invalid data for day:", day); // Log invalid day data
         }
     });
@@ -89,12 +95,17 @@ function getForecast(city){
 function handleSearchSubmit(event){
     event.preventDefault();
     var searchInput = document.querySelector("#search-form-input");
+    //cityElement should be in updateWeatherInfo
     var cityElement = document.querySelector("#selected-city");
+    //cityElement's value is response.data.city
     cityElement.innerHTML = searchInput.value;
     searchCity(searchInput.value);
+    //get forecast should not be in here
     getForecast(searchInput.value);
 }
 var searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 searchCity("London");
+
+//get rid of this call
 getForecast("London");
